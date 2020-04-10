@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Contacts.Data.Repositories.Mock
 {
-    internal class MockContactRepository
+    public class MockContactRepository
     {
         private readonly MockContext Context;
 
@@ -13,7 +13,7 @@ namespace Contacts.Data.Repositories.Mock
             Context = context;
         }
 
-        public async Task<Contact> Read(int id)
+        public async Task<Contact> ReadAsync(int id)
         {
             return await Task.FromResult(Context.Contacts.FirstOrDefault(contact => contact.Id == id));
         }

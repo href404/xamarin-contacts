@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Contacts.Data
 {
-    internal class MockContext
+    public class MockContext
     {
         public List<Contact> Contacts = new List<Contact>
         {
