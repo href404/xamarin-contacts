@@ -1,5 +1,4 @@
 ﻿using Contacts.Models;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Contacts.ViewModels
@@ -18,9 +17,7 @@ namespace Contacts.ViewModels
 
         public DisplayContactViewModel()
         {
-            LoadCommand = new Command(async () => await LoadAsync());
+            LoadCommand = new Command(async () => Model = await Service.ReadAsync(1));
         }
-
-        private async Task LoadAsync() => Model = await Service.ReadAsync(1);
     }
 }

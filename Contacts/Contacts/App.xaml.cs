@@ -9,7 +9,7 @@ namespace Contacts
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new DisplayContactView());
+            MainPage = new NavigationPage(new ListContactView());
         }
 
         protected override void OnStart()

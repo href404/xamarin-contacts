@@ -1,5 +1,4 @@
 ﻿using Contacts.Models;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Contacts.ViewModels
@@ -13,10 +12,8 @@ namespace Contacts.ViewModels
         public EditContactViewModel(ContactModel model)
         {
             Model = model;
-            SaveCommand = new Command(async () => await SaveAsync());
-            DeleteCommand = new Command(async () => await DeleteAsync());
+            SaveCommand = new Command(async () => await Service.UpdateAsync(Model));
+            DeleteCommand = new Command(async () => await Service.DeleteAsync(Model));
         }
-        private async Task SaveAsync() => await Service.UpdateAsync(Model);
-        private async Task DeleteAsync() => await Service.DeleteAsync(Model);
     }
 }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Contacts.Data.Repositories.Mock
 {
@@ -37,6 +38,11 @@ namespace Contacts.Data.Repositories.Mock
 
             Context.Contacts.RemoveAt(indexContact);
             return await Task.FromResult(true);
+        }
+
+        public async Task<IEnumerable<Contact>> ReadAsync()
+        {
+            return await Task.FromResult(Context.Contacts);
         }
     }
 }
