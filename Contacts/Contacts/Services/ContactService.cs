@@ -1,19 +1,19 @@
-﻿using Contacts.Data;
-using Contacts.Data.Models;
-using Contacts.Data.Repositories.Mock;
+﻿using Contacts.Data.Models;
 using Contacts.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Contacts.Data.Repositories;
+using Contacts.Data.Repositories.SQL;
 
 namespace Contacts.Services
 {
     public class ContactService
     {
-        private readonly MockContactRepository ContactRepository;
+        private readonly IContactRepository ContactRepository;
 
-        public ContactService() => ContactRepository = new MockContactRepository(new MockContext());
+        public ContactService() => ContactRepository = new SQLContactRepository();
 
         public async Task<ContactModel> ReadAsync(int id)
         {
