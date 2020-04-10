@@ -10,10 +10,10 @@ namespace Contacts.Views
     {
         private readonly DisplayContactViewModel ViewModel;
 
-        public DisplayContactView()
+        public DisplayContactView(int id)
         {
             InitializeComponent();
-            ViewModel = new DisplayContactViewModel();
+            ViewModel = new DisplayContactViewModel(id);
             BindingContext = ViewModel;
         }
 
@@ -26,6 +26,7 @@ namespace Contacts.Views
         private async void Edit_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new EditContactView(ViewModel.Model));
+            Navigation.RemovePage(this);
         }
     }
 }

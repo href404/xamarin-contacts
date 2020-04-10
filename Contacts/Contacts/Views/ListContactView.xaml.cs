@@ -1,4 +1,5 @@
-﻿using Contacts.ViewModels;
+﻿using Contacts.Models;
+using Contacts.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,10 +9,25 @@ namespace Contacts.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListContactView : ContentPage
     {
+        private readonly ListContactViewModel ViewModel;
+
         public ListContactView()
         {
             InitializeComponent();
-            BindingContext = new ListContactViewModel();
+            ViewModel = new ListContactViewModel();
+            BindingContext = ViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.LoadCommand.Execute(null);
+        }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ContactModel contact = (ContactModel) e.Item;
+            await Navigation.PushAsync(new DisplayContactView(contact.Id));
         }
     }
 }

@@ -7,7 +7,7 @@
              x:Class="Contacts.Views.ListContactView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding Models}">
+            <ListView ItemsSource="{Binding Models}" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding FullName}" />

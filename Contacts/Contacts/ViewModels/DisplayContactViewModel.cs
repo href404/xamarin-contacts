@@ -15,9 +15,10 @@ namespace Contacts.ViewModels
 
         public Command LoadCommand { get; }
 
-        public DisplayContactViewModel()
+        public DisplayContactViewModel(int id)
         {
-            LoadCommand = new Command(async () => Model = await Service.ReadAsync(1));
+            Model = model;
+            LoadCommand = new Command(async () => Model = await Service.ReadAsync(id));
         }
     }
 }
