@@ -5,8 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Contacts.Views.ListContactView">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add contact" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="10" Spacing="10">
             <ListView ItemsSource="{Binding Models}" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>

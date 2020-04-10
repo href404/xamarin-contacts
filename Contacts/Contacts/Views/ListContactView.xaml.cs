@@ -1,6 +1,6 @@
 ﻿using Contacts.Models;
 using Contacts.ViewModels;
-
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +28,11 @@ namespace Contacts.Views
         {
             ContactModel contact = (ContactModel) e.Item;
             await Navigation.PushAsync(new DisplayContactView(contact.Id));
+        }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateContactView());
         }
     }
 }

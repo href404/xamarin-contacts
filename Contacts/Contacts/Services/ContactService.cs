@@ -43,5 +43,14 @@ namespace Contacts.Services
                 LastName = contact.LastName
             }));
         }
+
+        public async Task AddAsync(ContactModel contact)
+        {
+            await ContactRepository.AddAsync(new Contact
+            {
+                FirstName = contact.FirstName,
+                LastName = contact.LastName
+            });
+        }
     }
 }

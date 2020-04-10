@@ -1,7 +1,6 @@
 ﻿using Contacts.Data.Models;
 using System.Threading.Tasks;
 using System.Linq;
-using System;
 using System.Collections.Generic;
 
 namespace Contacts.Data.Repositories.Mock
@@ -43,6 +42,18 @@ namespace Contacts.Data.Repositories.Mock
         public async Task<IEnumerable<Contact>> ReadAsync()
         {
             return await Task.FromResult(Context.Contacts);
+        }
+
+        public async Task<bool> AddAsync(Contact contact)
+        {
+            contact.Id = Context.Contacts.Count != 0 ? Context.Contacts.Max(c => c.Id) + 1 : 1;
+            Context.Contacts.Add(contact);
+
+            int indexContact = Context.Contacts.FindIndex(c => c.Id == contact.Id);
+            if (indexContact == -1)
+                return await Task.FromResult(false);
+
+            return await Task.FromResult(true);
         }
     }
 }

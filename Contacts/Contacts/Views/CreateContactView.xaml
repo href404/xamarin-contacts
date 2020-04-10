@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Contacts.Views.CreateContactView">
+    <ContentPage.Content>
+        <StackLayout Margin="10" Spacing="10">
+            <Entry Placeholder="Lastname of contact" Text="{Binding Model.LastName, Mode=TwoWay}" />
+            <Entry Placeholder="Firstname of contact" Text="{Binding Model.FirstName, Mode=TwoWay}" />
+            <Button Text="Save" HorizontalOptions="Center" Clicked="Save_Button_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
