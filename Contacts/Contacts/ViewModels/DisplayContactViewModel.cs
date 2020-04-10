@@ -1,23 +1,24 @@
 ﻿using Contacts.Models;
-using Contacts.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Contacts.ViewModels
 {
-    public class DisplayContactViewModel
+    public class DisplayContactViewModel : BaseViewModel
     {
-        public ContactModel Model { get; private set; }
-        public Command LoadCommand { get; }
+        private ContactModel model;
 
-        private readonly ContactService Service;
+        public ContactModel Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
+
+        public Command LoadCommand { get; }
 
         public DisplayContactViewModel()
         {
-            Service = new ContactService();
             LoadCommand = new Command(async () => await LoadAsync());
-            
-            LoadCommand.Execute(null);
         }
 
         private async Task LoadAsync() => Model = await Service.ReadAsync(1);

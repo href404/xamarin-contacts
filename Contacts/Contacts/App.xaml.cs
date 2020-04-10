@@ -1,7 +1,5 @@
 ﻿using Contacts.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Contacts
 {
@@ -11,7 +9,7 @@ namespace Contacts
         {
             InitializeComponent();
 
-            MainPage = new DisplayContactView();
+            MainPage = new NavigationPage(new DisplayContactView());
         }
 
         protected override void OnStart()

@@ -4,12 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Contacts.Views.DisplayContactView">
+             x:Class="Contacts.Views.EditContactView">
     <ContentPage.Content>
         <StackLayout Margin="10" Spacing="10">
-            <Label Text="{Binding Model.LastName, Mode=TwoWay}" />
-            <Label Text="{Binding Model.FirstName, Mode=TwoWay}" />
-            <Button Text="Edit" HorizontalOptions="Center" Clicked="Edit_Button_Clicked" />
+            <Entry Placeholder="Lastname of contact" Text="{Binding Model.LastName, Mode=TwoWay}" />
+            <Entry Placeholder="Firstname of contact" Text="{Binding Model.FirstName, Mode=TwoWay}" />
+            <Button Text="Save" HorizontalOptions="Center" Clicked="Save_Button_Clicked" />
+            <Button Text="Delete" HorizontalOptions="Center" Clicked="Delete_Button_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
