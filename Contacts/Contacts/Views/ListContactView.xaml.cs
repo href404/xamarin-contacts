@@ -18,12 +18,6 @@ namespace Contacts.Views
             BindingContext = ViewModel;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ViewModel.LoadCommand.Execute(null);
-        }
-
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             ContactModel contact = (ContactModel) e.Item;

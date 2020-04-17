@@ -1,4 +1,6 @@
 ﻿using Contacts.Models;
+using Contacts.Services;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Contacts.ViewModels
@@ -11,7 +13,13 @@ namespace Contacts.ViewModels
         public CreateContactViewModel()
         {
             Model = new ContactModel();
-            SaveCommand = new Command(async () => await Service.AddAsync(Model));
+            SaveCommand = new Command(async () => await SaveAsync());
+        }
+
+        private async Task SaveAsync()
+        {
+            await Service.AddAsync(Model);
+            Messaging.Send(MessageType.RefreshContact);
         }
     }
 }

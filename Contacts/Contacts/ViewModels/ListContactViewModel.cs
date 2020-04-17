@@ -1,4 +1,5 @@
 ﻿using Contacts.Models;
+using Contacts.Services;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,12 +15,14 @@ namespace Contacts.ViewModels
         {
             Models = new ObservableCollection<ContactModel>();
             LoadCommand = new Command(async () => await LoadAsync());
+
+            Messaging.Subscribe(MessageType.RefreshContact, async (sender) => await LoadAsync());
+            LoadCommand.Execute(null);
         }
 
         private async Task LoadAsync()
         {
             Models.Clear();
-
             foreach (ContactModel contact in await Service.ReadAsync())
                 Models.Add(contact);
         }

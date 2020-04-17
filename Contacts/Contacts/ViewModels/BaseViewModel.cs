@@ -10,13 +10,8 @@ namespace Contacts.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected readonly ContactService Service;
-
-        public BaseViewModel()
-        {
-            if (Service == null)
-                Service = new ContactService();
-        }
+        protected static readonly ContactService Service = new ContactService();
+        protected static readonly MessagingService Messaging = new MessagingService();
 
         protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
         {

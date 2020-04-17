@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Contacts.Data.Repositories;
-using Contacts.Data.Repositories.HTTP;
+using Contacts.Data.Repositories.Mock;
 
 namespace Contacts.Services
 {
@@ -13,7 +13,7 @@ namespace Contacts.Services
     {
         private readonly IContactRepository ContactRepository;
 
-        public ContactService() => ContactRepository = new HTTPContactRepository();
+        public ContactService() => ContactRepository = new MockContactRepository();
 
         public async Task<ContactModel> ReadAsync(int id)
         {
