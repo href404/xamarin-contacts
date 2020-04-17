@@ -1,19 +1,43 @@
 ﻿using Contacts.Models;
+using Contacts.Services;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Contacts.ViewModels
 {
     public class EditContactViewModel : BaseViewModel
     {
-        public ContactModel Model { get; private set; }
+        private ContactModel model;
+
+        public ContactModel Model
+        {
+            get { return model; }
+            set { SetProperty(ref model, value); }
+        }
         public Command SaveCommand { get; }
         public Command DeleteCommand { get; }
 
-        public EditContactViewModel(ContactModel model)
+        public EditContactViewModel()
         {
-            Model = model;
-            SaveCommand = new Command(async () => await Service.UpdateAsync(Model));
-            DeleteCommand = new Command(async () => await Service.DeleteAsync(Model));
+            SaveCommand = new Command(async () => await UpdateAsync());
+            DeleteCommand = new Command(async () => await DeleteAsync());
+
+            Messaging.Subscribe<ContactModel>(MessageType.EditContact, (sender, model) => Model = model);
+        }
+
+
+        private async Task UpdateAsync()
+        {
+            await Service.UpdateAsync(Model);
+            Messaging.Send(MessageType.RefreshContact);
+        }
+
+
+        private async Task DeleteAsync()
+        {
+            await Service.DeleteAsync(Model);
+            Messaging.Send(MessageType.RefreshContact);
         }
     }
 }

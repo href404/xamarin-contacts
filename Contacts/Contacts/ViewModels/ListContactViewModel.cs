@@ -20,6 +20,8 @@ namespace Contacts.ViewModels
             LoadCommand.Execute(null);
         }
 
+        public void ReadContact(int id) => Messaging.Send(MessageType.ReadContact, id);
+
         private async Task LoadAsync()
         {
             Models.Clear();

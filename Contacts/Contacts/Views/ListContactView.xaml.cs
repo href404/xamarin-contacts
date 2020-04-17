@@ -21,7 +21,8 @@ namespace Contacts.Views
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             ContactModel contact = (ContactModel) e.Item;
-            await Navigation.PushAsync(new DisplayContactView(contact.Id));
+            await Navigation.PushAsync(new DisplayContactView());
+            ViewModel.ReadContact(contact.Id);
         }
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)

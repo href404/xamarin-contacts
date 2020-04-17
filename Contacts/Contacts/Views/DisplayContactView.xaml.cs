@@ -10,23 +10,18 @@ namespace Contacts.Views
     {
         private readonly DisplayContactViewModel ViewModel;
 
-        public DisplayContactView(int id)
+        public DisplayContactView()
         {
             InitializeComponent();
-            ViewModel = new DisplayContactViewModel(id);
+            ViewModel = new DisplayContactViewModel();
             BindingContext = ViewModel;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ViewModel.LoadCommand.Execute(null);
         }
 
         private async void Edit_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditContactView(ViewModel.Model));
+            await Navigation.PushAsync(new EditContactView());
             Navigation.RemovePage(this);
+            ViewModel.EditContact();
         }
     }
 }

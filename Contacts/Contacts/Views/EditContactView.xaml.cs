@@ -11,10 +11,10 @@ namespace Contacts.Views
     {
         private readonly EditContactViewModel ViewModel;
 
-        public EditContactView(ContactModel model)
+        public EditContactView()
         {
             InitializeComponent();
-            ViewModel = new EditContactViewModel(model);
+            ViewModel = new EditContactViewModel();
             BindingContext = ViewModel;
         }
 
