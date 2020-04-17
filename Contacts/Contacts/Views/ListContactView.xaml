@@ -7,12 +7,12 @@
              x:Class="Contacts.Views.ListContactView">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add contact" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Add contact" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Margin="10" Spacing="10">
-            <ListView ItemsSource="{Binding Models}" ItemTapped="ListView_ItemTapped">
+            <ListView ItemsSource="{Binding Models}" SelectedItem="{Binding Selected, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding FullName}" />

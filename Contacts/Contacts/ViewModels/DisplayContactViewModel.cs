@@ -1,5 +1,7 @@
 ﻿using Contacts.Models;
+using Contacts.Services;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Contacts.ViewModels
 {
@@ -13,16 +15,18 @@ namespace Contacts.ViewModels
             set { SetProperty(ref model, value); }
         }
 
+        public Command EditCommand { get; }
+
         public DisplayContactViewModel()
         {
-            Messaging.Subscribe<int>(Services.MessageType.ReadContact, async (sender, id) => await ReadAsync(id));
+            Messaging.Subscribe<int>(MessageType.ReadContact, async (sender, id) => Model = await Service.ReadAsync(id));
+            EditCommand = new Command(async () => await EditContact());
         }
 
-        private async Task ReadAsync(int id) => Model = await Service.ReadAsync(id);
-
-        public void EditContact()
+        public async Task EditContact()
         {
-            Messaging.Send(Services.MessageType.EditContact, Model);
+            await Navigation.PushAsync(PageKey.EditContact, true);
+            Messaging.Send(MessageType.EditContact, Model);
         }
     }
 }

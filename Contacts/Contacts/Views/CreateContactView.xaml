@@ -9,7 +9,7 @@
         <StackLayout Margin="10" Spacing="10">
             <Entry Placeholder="Lastname of contact" Text="{Binding Model.LastName, Mode=TwoWay}" />
             <Entry Placeholder="Firstname of contact" Text="{Binding Model.FirstName, Mode=TwoWay}" />
-            <Button Text="Save" HorizontalOptions="Center" Clicked="Save_Button_Clicked" />
+            <Button Text="Save" HorizontalOptions="Center" Command="{Binding SaveCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

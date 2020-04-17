@@ -9,7 +9,7 @@
         <StackLayout Margin="10" Spacing="10">
             <Label Text="{Binding Model.LastName, Mode=TwoWay}" />
             <Label Text="{Binding Model.FirstName, Mode=TwoWay}" />
-            <Button Text="Edit" HorizontalOptions="Center" Clicked="Edit_Button_Clicked" />
+            <Button Text="Edit" HorizontalOptions="Center" Command="{Binding EditCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

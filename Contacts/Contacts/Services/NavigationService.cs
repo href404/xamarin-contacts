@@ -7,18 +7,30 @@ namespace Contacts.Services
 {
     public class NavigationService
     {
-        private readonly Stack<Page> pages = new Stack<Page>();
+        private static readonly Stack<Page> pages = new Stack<Page>();
         private static readonly Dictionary<PageKey, Type> pageTypes = new Dictionary<PageKey, Type>();
 
-        public NavigationService() => pages.Push(Application.Current.MainPage);
-        
+        public static void SetMainPage() => pages.Push(Application.Current.MainPage);
         public static void AddPage(PageKey key, Type type) => pageTypes[key] = type;
 
-        public async Task PushAsync(PageKey pageKey)
+        public async Task PushAsync(PageKey pageKey, bool remove = false)
         {
+            CleanStack();
+
+            Page parent = pages.Peek();
             Page page = (Page) Activator.CreateInstance(pageTypes[pageKey]);
-            await pages.Peek().Navigation.PushAsync(page);
+            await parent.Navigation.PushAsync(page);
+
+            if (remove)
+                Remove(parent, page);
+
             pages.Push(page);
+        }
+
+        private void CleanStack()
+        {
+            while (pages.Count > 1 && ((NavigationPage)Application.Current.MainPage).CurrentPage != pages.Peek())
+                pages.Pop();
         }
 
         public async Task PopAsync()
@@ -27,7 +39,11 @@ namespace Contacts.Services
             await page.Navigation.PopAsync();
         }
 
-        public void Remove(object page) { }
+        private void Remove(Page parent, Page page)
+        {
+            parent.Navigation.RemovePage(page);
+            pages.Pop();
+        }
     }
 
     public enum PageKey

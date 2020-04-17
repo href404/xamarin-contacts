@@ -1,6 +1,5 @@
 ﻿using Contacts.Models;
 using Contacts.Services;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -26,18 +25,18 @@ namespace Contacts.ViewModels
             Messaging.Subscribe<ContactModel>(MessageType.EditContact, (sender, model) => Model = model);
         }
 
-
         private async Task UpdateAsync()
         {
             await Service.UpdateAsync(Model);
             Messaging.Send(MessageType.RefreshContact);
+            await Navigation.PopAsync();
         }
-
 
         private async Task DeleteAsync()
         {
             await Service.DeleteAsync(Model);
             Messaging.Send(MessageType.RefreshContact);
+            await Navigation.PopAsync();
         }
     }
 }

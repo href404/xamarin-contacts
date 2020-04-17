@@ -19,6 +19,7 @@ namespace Contacts.ViewModels
         private async Task SaveAsync()
         {
             await Service.AddAsync(Model);
+            await Navigation.PopAsync();
             Messaging.Send(MessageType.RefreshContact);
         }
     }

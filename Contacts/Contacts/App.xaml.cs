@@ -16,6 +16,7 @@ namespace Contacts
             NavigationService.AddPage(PageKey.EditContact, typeof(EditContactView));
 
             MainPage = new NavigationPage(new ListContactView());
+            NavigationService.SetMainPage();
         }
 
         protected override void OnStart()
