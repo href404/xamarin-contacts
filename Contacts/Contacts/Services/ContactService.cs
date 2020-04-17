@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Contacts.Data.Repositories;
-using Contacts.Data.Repositories.SQL;
+using Contacts.Data.Repositories.HTTP;
 
 namespace Contacts.Services
 {
@@ -13,7 +13,7 @@ namespace Contacts.Services
     {
         private readonly IContactRepository ContactRepository;
 
-        public ContactService() => ContactRepository = new SQLContactRepository();
+        public ContactService() => ContactRepository = new HTTPContactRepository();
 
         public async Task<ContactModel> ReadAsync(int id)
         {
