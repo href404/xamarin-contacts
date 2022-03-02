@@ -22,4 +22,4 @@ jobs:
       run: nuget restore ./Contacts.sln
 
     - name: Build
-      run: msbuild ./Contacts.Android/Contacts.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
+      run: msbuild ./Contacts/Contacts.Android/Contacts.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
