@@ -1,0 +1,25 @@
+name: Build Xamarin.Android app
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+        
+    - name: Setup Xamarin
+      uses: maxim-lobanov/setup-xamarin@v1
+
+    - name: Setup .NET Standard 2.0.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.0.x'
+
+    - name: Install dependencies
+      run: nuget restore ./Contacts.sln
+
+    - name: Build
+      run: msbuild ./Contacts.Android/Contacts.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
